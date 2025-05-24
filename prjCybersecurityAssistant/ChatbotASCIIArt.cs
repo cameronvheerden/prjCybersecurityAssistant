@@ -227,5 +227,4 @@
    Available at: https://www.c-sharpcorner.com/article/using-system-speech-with-net-7/#:~:text=In%20this%20article%2C%20I%27ll%20demonstrate%20how%20to%20use,recognition%20and%20text-to-speech%20and%20provides%20a%20unified%20API.
    [Accessed 20 April 2025].
    Troelsen, A. & Japikse, P., 2021. Pro C# 9 with .NET 5: Foundational Principles and Practices in Programming. 10th ed. New York: Apress Berkeley, CA.
-
 */
