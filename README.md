@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is Part 2 of the Cybersecurity Awareness Chatbot assignment. In this part, the chatbot is extended to provide dynamic responses, keyword recognition, memory recall, and sentiment detection for a more interactive and educational experience. The chatbot now simulates a natural conversation flow and supports cybersecurity awareness through personalised and empathetic interactions.
+This is Part 2 of the Cybersecurity Awareness Chatbot assignment. In this part, the chatbot is extended to provide dynamic responses, keyword recognition, memory recall, and sentiment detection for a more interactive experience.
 
 ---
 
@@ -20,36 +20,43 @@ This is Part 2 of the Cybersecurity Awareness Chatbot assignment. In this part, 
 
 ## Installation Instructions
 
+### Using Command Line (cmd, PowerShell, or Bash)
+
 1. **Clone the Repository**
-    ```bash
-    git clone [<YOUR_REPOSITORY_URL>](https://github.com/cameronvheerden/prjCybersecurityAssistant.git)
-    cd "C:\Users\lab_services_student\Desktop\vcnmb-prog6221-2025-poe-cameronvheerden\prjCybersecurityAssistant\prjCybersecurityAssistant\prjCybersecurityAssistant.csproj"
-    ```
 
-2. **Open the Project**
-    - Open the solution in Visual Studio (or your preferred C# IDE).
+   ```bash
+   git clone https://github.com/cameronvheerden/prjCybersecurityAssistant.git
+   cd prjCybersecurityAssistant/prjCybersecurityAssistant
+   ```
+   > _Note: If your solution file is in a different folder, navigate to the folder containing your `.csproj` or `.sln` file._
 
-3. **Restore Dependencies**
-    - If using .NET Core/5+/6+, restore NuGet packages:
-      ```bash
-      dotnet restore
-      ```
+2. **Restore Dependencies**
 
-4. **Build the Project**
-    - In Visual Studio: Press `Ctrl+Shift+B`
-    - Or via CLI:
-      ```bash
-      dotnet build
-      ```
+   ```bash
+   dotnet restore
+   ```
 
-5. **Run the Chatbot**
-    - In Visual Studio: Press `F5` or click "Start"
-    - Or via CLI:
-      ```bash
-      dotnet run
-      ```
+3. **Build the Project**
+
+   ```bash
+   dotnet build
+   ```
+
+4. **Run the Chatbot**
+
+   ```bash
+   dotnet run
+   ```
+
+### Using Visual Studio (or your preferred C# IDE)
+
+1. Open the solution in Visual Studio.
+2. Restore NuGet packages if prompted.
+3. Build the project (`Ctrl+Shift+B`).
+4. Run the chatbot by pressing `F5` or clicking "Start".
 
 ---
+
 ## Installation Instructions (Using GitHub Releases)
 
 To install and run the Cybersecurity Awareness Chatbot using the pre-built release files from GitHub:
@@ -82,6 +89,7 @@ If you get a warning about running files from the internet, you may need to allo
 For advanced users, you can still build from source by following the instructions in the main README.
 
 ---
+
 ## How to Use
 
 - Start the chatbot and interact via the console.
