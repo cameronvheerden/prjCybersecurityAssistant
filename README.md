@@ -22,8 +22,8 @@ This is Part 2 of the Cybersecurity Awareness Chatbot assignment. In this part, 
 
 1. **Clone the Repository**
     ```bash
-    git clone <YOUR_REPOSITORY_URL>
-    cd <YOUR_REPOSITORY_DIRECTORY>
+    git clone [<YOUR_REPOSITORY_URL>](https://github.com/cameronvheerden/prjCybersecurityAssistant.git)
+    cd "C:\Users\lab_services_student\Desktop\vcnmb-prog6221-2025-poe-cameronvheerden\prjCybersecurityAssistant\prjCybersecurityAssistant\prjCybersecurityAssistant.csproj"
     ```
 
 2. **Open the Project**
