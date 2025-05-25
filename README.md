@@ -50,7 +50,38 @@ This is Part 2 of the Cybersecurity Awareness Chatbot assignment. In this part, 
       ```
 
 ---
+## Installation Instructions (Using GitHub Releases)
 
+To install and run the Cybersecurity Awareness Chatbot using the pre-built release files from GitHub:
+
+1. **Go to the Releases Page**
+   - On your repository's GitHub page, look for the **"Releases"** section on the right-hand side.
+   - Or, click on the **"Releases"** link or tab (usually found near the top or right of your repo page).
+
+2. **Download the Latest Release**
+   - Find the latest release (at the top of the list).
+   - Under "Assets", download the file that matches your operating system (for example: `.zip` for Windows, `.tar.gz` for Linux/Mac).
+
+3. **Extract the Files**
+   - Windows: Right-click the `.zip` file and choose "Extract All..."
+   - Mac/Linux: Use Finder or run `tar -xzf <file>.tar.gz` in the terminal.
+
+4. **Run the Application**
+   - Open the extracted folder.
+   - Double-click the executable file (for example, `CybersecurityChatbot.exe` on Windows).
+   - **OR** open a terminal/command prompt in the extracted directory and run the executable (for example: `./CybersecurityChatbot`).
+
+5. **Start Interacting**
+   - Follow the prompts in the console to begin chatting with the Cybersecurity Awareness Chatbot!
+
+---
+
+**Note:**  
+If you get a warning about running files from the internet, you may need to allow or unblock the executable depending on your operating system.
+
+For advanced users, you can still build from source by following the instructions in the main README.
+
+---
 ## How to Use
 
 - Start the chatbot and interact via the console.
