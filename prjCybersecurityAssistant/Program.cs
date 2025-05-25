@@ -13,7 +13,6 @@
         }
     }
 }
-
 /*
  Reference List
     https://patorjk.com/software/taag/#p=testall&f=Graffiti&t=
