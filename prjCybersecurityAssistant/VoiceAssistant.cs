@@ -3,10 +3,15 @@ using System.Speech.Synthesis;
 
 namespace prjCybersecurityAssistant
 {
+
+    // Abstract base class providing voice, sound, and user input features for chatbot assistants.
+    // Handles speech synthesis, typing effect, sound playback, and input collection.
+
     public abstract class VoiceAssistant
     {
         private readonly SpeechSynthesizer _ss;    
 
+        //Initializes the speech synthesizer and sets the preferred voice if available.
         public VoiceAssistant()
         {
             _ss = new SpeechSynthesizer();
@@ -44,8 +49,12 @@ namespace prjCybersecurityAssistant
             }
         }
 
-        // Simulates a typing effect and adds conversational pauses before speaking
-        public virtual void Speak(string text, ConsoleColor color = ConsoleColor.White, int typingDelay = 30, int pauseAfter = 300)
+        // Simulates a typing effect, adds a pause, and then speaks the text out loud.
+        //Text to display and speak.
+        //Console color for the text.
+        //Delay per character in ms.
+        //Pause after text in ms before speaking.
+        public virtual void Speak(string text, ConsoleColor color = ConsoleColor.DarkMagenta, int typingDelay = 30, int pauseAfter = 300)
         {
             Console.ForegroundColor = color;
 
@@ -57,10 +66,14 @@ namespace prjCybersecurityAssistant
 
             Console.WriteLine();
             Thread.Sleep(pauseAfter);
-            _ss.SpeakAsync(text);
+            _ss.Speak(text);
             Console.ResetColor();
         }
 
+
+        // Prompts the user for input, ensuring a non-empty response.
+        //Prompt text for the user.
+        //User input in lowercase.
         public static string GetUserInput(string prompt = "You: ")
         {
             string input;
@@ -75,7 +88,8 @@ namespace prjCybersecurityAssistant
 
                 if (string.IsNullOrWhiteSpace(input))
                 {
-                    Speak("Please enter something to continue...", ConsoleColor.Red);
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("Please enter something to continue...");
                     Console.ResetColor();
                 }
 
@@ -85,16 +99,18 @@ namespace prjCybersecurityAssistant
         }
 
 
-
-        // Method to play a sound file
+        // Plays a sound file synchronously and adds a short delay after playback.
+        //Path to the sound file.
+        //True if playback succeeds, false otherwise.</returns>
         public bool PlaySound(string filename)//(O'Didily, 2022)
         {
             try
             {
                 // Use SoundPlayer to play the specified sound file
-                using SoundPlayer player = new SoundPlayer();//(O'Didily, 2022)
+                using SoundPlayer player =  new SoundPlayer();//(O'Didily, 2022)
                 player.SoundLocation = filename;//(O'Didily, 2022)
                 player.PlaySync();//(O'Didily, 2022) Changed to PlaySync for synchronous playback
+                Thread.Sleep(1000); // Add a 1 second delay after the sound is played
                 return true;//
             }
             catch (Exception ex)

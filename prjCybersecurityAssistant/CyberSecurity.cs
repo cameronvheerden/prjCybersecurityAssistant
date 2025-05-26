@@ -3,6 +3,10 @@ using System.Speech.Synthesis;
 
 namespace prjCybersecurityAssistant
 {
+
+    // The CyberSecurity class is an interactive chatbot assistant that provides cybersecurity tips, handles user sentiment,
+    // and responds to keyword-based queries. Inherits from VoiceAssistant for speech and sound features.
+
     public class CyberSecurity : VoiceAssistant
     {
         //Memory for user details
@@ -18,7 +22,6 @@ namespace prjCybersecurityAssistant
         //Dictionary to hold keyword handlers
         private Dictionary<string, Action<string>> keywordHandler;
 
-
         //Collection of keywords and their associated Colours for the chatbots responses
         private Dictionary<string, ConsoleColor> topicColors = new Dictionary<string, ConsoleColor>(StringComparer.OrdinalIgnoreCase)
         {
@@ -28,7 +31,6 @@ namespace prjCybersecurityAssistant
             ["social engineering"] = ConsoleColor.DarkCyan,
             ["general"] = ConsoleColor.White
         };
-
 
         //Generic dictionary to hold keyword responses
         private Dictionary<string, List<string>> topicTips = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase)
@@ -89,6 +91,7 @@ namespace prjCybersecurityAssistant
             }
         };
 
+        // Initializes the CyberSecurity assistant, setting up randomization, sentiment, and keyword handlers.
 
         public CyberSecurity()
         {
@@ -116,18 +119,167 @@ namespace prjCybersecurityAssistant
             };
         }
 
+        // Main entry point for the assistant. Handles user interaction, topic selection, and main chat loop.
+
         public void Start()
         {
+            PlaySound("startup.wav");
+            Console.WriteLine("Press enter to start!");
+            Console.ReadLine(); // Wait for user to press enter before starting
 
+            // Initial welcome message with humor
+            Speak("Welcome to the CyberSecurity Assistant! I'm your digital bodyguard, bouncer, and comedian rolled into one. Before we get serious, here's a quick round of cybersecurity dad jokes to lighten the mood!", ConsoleColor.Cyan);
+            PlaySound("drumroll.wav");
+            dadCyberSecurityJokes();
+
+            // Ask for user's name
+            Speak("Before we dive in, what's your name? (Don't worry, I won't put it in a password... or will I? Just kidding!)", ConsoleColor.Cyan);
+            userName = GetUserInput("You: ");
+            PlaySound("input.wav");
+
+            // Ask for user's favorite topic
+            Speak($"Nice to meet you, {userName}! What's your favourite cybersecurity topic? I'll display the topics I am well aware of.", ConsoleColor.Cyan);
+            Console.WriteLine(@"
+        ╔════════════════════════════════════╗
+        ║         CYBERSECURITY MENU         ║
+        ╠════════════════════════════════════╣
+        ║  1. Phishing                       ║
+        ║  2. Passwords                      ║
+        ║  3. Suspicious Links               ║
+        ║  4. Social Engineering             ║
+        ║  5. General Tips                   ║
+        ║  6. Exit                           ║
+        ╚════════════════════════════════════╝
+    ");
+            favouriteTopic = GetUserInput("You: ");
+            PlaySound("input.wav");
+
+            if (topicTips.ContainsKey(favouriteTopic))
+            {
+                Speak($"Awesome! I'll remember that your favourite topic is {favouriteTopic}. Expect some special tips later!", ConsoleColor.Green);
+                PlaySound("awesome.wav");
+
+                // Prompt user to ask about a keyword now
+                Speak("By the way, you can ask me about any of these keywords: phishing, passwords, suspicious links, social engineering, or general tips.", ConsoleColor.Cyan);
+                Speak("Which keyword would you like to know more about right now? (Or just press enter to skip)", ConsoleColor.Cyan);
+                string keywordInput = GetUserInput("You: ");
+                PlaySound("input.wav");
+
+                // If the user provides a keyword input, handle it
+                if (!string.IsNullOrWhiteSpace(keywordInput))
+                {
+                    foreach (var keyword in keywordHandler.Keys)
+                    {
+                        if (keywordInput.Contains(keyword, StringComparison.OrdinalIgnoreCase))
+                        {
+                            Speak($"Great choice! Here's something about {keyword}:", ConsoleColor.Green);
+                            keywordHandler[keyword](keywordInput);
+                            PlaySound("keyword.wav");
+                            break;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                Speak("I'll just give you general tips until you pick a topic. (I'm flexible like that!)", ConsoleColor.Yellow);
+                PlaySound("nice.wav");
+                favouriteTopic = "general";
+            }
+
+            // Main chat loop
+            while (true)
+            {
+                // Ask for user input and allow them to share concerns or ask questions
+                Speak("Ask me anything about cybersecurity, or type 'exit' to leave (I promise not to take it personally!). Tell me if you are worried about anything or have any fears entering the online space.", ConsoleColor.Cyan);
+                Console.WriteLine("Are you worried about anything or have fears such as being 'curious', 'frustrated', 'overwhelmed', 'skeptical'?");
+                string input = GetUserInput("You: ");
+                PlaySound("input.wav");
+
+                // Exit condition
+                if (input.Contains("exit", StringComparison.OrdinalIgnoreCase))
+                {
+                    PlaySound("oh no.wav");
+                    Speak($"Goodbye {userName}! Remember: If you ever get a suspicious email, just send it to me for a joke. Stay safe and silly!", ConsoleColor.Magenta);
+                    PlaySound("bye bye.wav");
+                    Console.ReadLine();
+                    break;
+                }
+
+                // Handle known sentiments and provide comforting or informative responses
+                string sentiment = DetectSentiment(input);
+                if (!string.IsNullOrEmpty(sentiment) && sentimentResponses.ContainsKey(sentiment))
+                {
+                    sentimentResponses[sentiment](input);
+                    PlaySound(sentiment);
+                }
+
+                // Check if the input includes known cybersecurity keywords
+                bool foundKeyword = false;
+                foreach (var keyword in keywordHandler.Keys)
+                {
+                    if (input.Contains(keyword, StringComparison.OrdinalIgnoreCase))
+                    {
+                        keywordHandler[keyword](input);
+                        PlaySound("keyword.wav");
+                        foundKeyword = true;
+                        break;
+                    }
+                }
+
+                // If no keyword detected, ask the user if they'd like to explore one
+                if (!foundKeyword)
+                {
+                    Speak("Would you like to learn more about a specific keyword? (phishing, passwords, suspicious links, social engineering, general). Just type one or press enter to skip.", ConsoleColor.Cyan);
+                    string keywordPrompt = GetUserInput("You: ");
+                    PlaySound("input.wav");
+
+                    if (!string.IsNullOrWhiteSpace(keywordPrompt))
+                    {
+                        foreach (var keyword in keywordHandler.Keys)
+                        {
+                            if (keywordPrompt.Contains(keyword, StringComparison.OrdinalIgnoreCase))
+                            {
+                                Speak($"Here's a quick tip about {keyword}:", ConsoleColor.Green);
+                                keywordHandler[keyword](keywordPrompt);
+                                PlaySound("keyword.wav");
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
+
+        // Detects simple sentiment keywords in user input and returns the sentiment type.
+        private string DetectSentiment(string input)
+        {
+            if (input.Contains("worried") || input.Contains("scared") || input.Contains("anxious"))
+                return "worried";
+
+            if (input.Contains("curious") || input.Contains("wonder") || input.Contains("interested"))
+                return "curious";
+
+            if (input.Contains("frustrated") || input.Contains("angry") || input.Contains("annoyed"))
+                return "frustrated";
+
+            if (input.Contains("overwhelmed") || input.Contains("confused") || input.Contains("lost"))
+                return "overwhelmed";
+
+            if (input.Contains("skeptical") || input.Contains("doubt") || input.Contains("don't believe"))
+                return "skeptical";
+
+            return null;
+        }
+
+        // Responds to "worried" sentiment with a random reassuring message.
         private void worriedResponse(string input)
         {
             List<string> _sentiment = new List<string>
             {
-              "It's completely understandable to feel worried or anxious browsing the web." +
-              "Scammers can be very cruel and they exploit innocent vunerable people but thats why I am here to assist you",
-              "That makes sense the internet can feel like a risky place sometimes. You're not alone in feeling this way, and I can help you spot the red flags",
+              "It's completely understandable to feel worried or anxious browsing the web. Scammers can be very cruel and they exploit innocent vulnerable people but that's why I am here to assist you.",
+              "That makes sense the internet can feel like a risky place sometimes. You're not alone in feeling this way, and I can help you spot the red flags.",
               "Worry is totally valid, especially with all the scams going around. Let's take it step by step and go over how you can stay protected.",
               "I get it cybersecurity can seem overwhelming at first. But once you know what to watch out for, it becomes much more manageable.",
               "It's normal to feel a bit anxious about online safety. The good news is that there are practical steps we can take together to minimize those risks.",
@@ -140,7 +292,7 @@ namespace prjCybersecurityAssistant
             Speak(response, ConsoleColor.DarkYellow);
         }
 
-
+        // Responds to "curious" sentiment with a random informative message.
         private void curiousResponse(string input)
         {
             List<string> _sentiment = new List<string>
@@ -156,6 +308,8 @@ namespace prjCybersecurityAssistant
             Speak(response, ConsoleColor.Blue);
         }
 
+
+        // Responds to "frustrated" sentiment with a random empathetic message.
         private void frustratedResponse(string input)
         {
             List<string> _sentiment = new List<string>
@@ -170,6 +324,10 @@ namespace prjCybersecurityAssistant
             string response = _sentiment[_random.Next(_sentiment.Count)];
             Speak(response, ConsoleColor.DarkRed);
         }
+
+
+        // Responds to "overwhelmed" sentiment with a random supportive message.
+
         private void overwhelmedResponse(string input)
         {
             List<string> _sentiment = new List<string>
@@ -185,6 +343,8 @@ namespace prjCybersecurityAssistant
             Speak(response, ConsoleColor.Cyan);
         }
 
+
+        // Responds to "skeptical" sentiment with a random validating message.
         private void skepticalResponse(string input)
         {
             List<string> _sentiment = new List<string>
@@ -200,7 +360,34 @@ namespace prjCybersecurityAssistant
             Speak(response, ConsoleColor.DarkGray);
         }
 
-        // Generic delegate method for topic tips with random Colours for each topic
+        //Tells a set of cybersecurity-themed dad jokes to the user.
+        private void dadCyberSecurityJokes()
+        {
+            // List of cybersecurity dad jokes
+            List<string> dadJokes = new List<string>
+            {
+                "Why did the hacker break up with the internet? There was no connection.",
+                "I told my password it was too weak. It cried... and then got hacked.",
+                "Why don’t hackers take vacations? Too afraid of leaving their cookies behind.",
+                "Why did the computer keep sneezing? It had a bad case of CAPS LOCK!",
+                "I asked the antivirus if it was feeling okay. It said, 'I'm just a bit overprotective.'",
+                "My router and I had a fight... now we’re not talking. The signal's just not there anymore.",
+                "Hackers wear leather jackets because they love brute-forcing their style."
+            };
+
+            // Tell 3 random jokes
+            for (int i = 0; i < 2; i++)
+            {
+                string joke = dadJokes[_random.Next(dadJokes.Count)];
+                Speak(joke, ConsoleColor.Green);
+                PlaySound("joke.wav");
+                Thread.Sleep(1000); // pause for effect
+            }
+            PlaySound("BOO.wav");
+            Speak("Alright, enough jokes! Let's get serious about cybersecurity. Ready to learn?", ConsoleColor.Cyan);
+        }
+
+        /// Provides a random tip for the specified cybersecurity topic, using a color associated with the topic.
         private void RespondWithRandomTip(string topic)
         {
             if (topicTips.ContainsKey(topic))
@@ -217,6 +404,5 @@ namespace prjCybersecurityAssistant
                 Speak("Sorry, I don't have tips on that topic yet.", ConsoleColor.Red);
             }
         }
-
     }
 }
