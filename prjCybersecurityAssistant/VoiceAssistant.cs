@@ -75,8 +75,7 @@ namespace prjCybersecurityAssistant
 
                 if (string.IsNullOrWhiteSpace(input))
                 {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("Please enter something to continue...");
+                    Speak("Please enter something to continue...", ConsoleColor.Red);
                     Console.ResetColor();
                 }
 
