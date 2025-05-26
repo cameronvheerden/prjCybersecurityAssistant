@@ -148,8 +148,7 @@ namespace prjCybersecurityAssistant
         ║  3. Suspicious Links               ║
         ║  4. Social Engineering             ║
         ║  5. General                        ║
-        ║  6. Favourite Tips                 ║
-        ║  7. Exit                           ║
+        ║  6. Exit                           ║
         ╚════════════════════════════════════╝
     ");
             favouriteTopic = GetUserInput("You: ");
@@ -231,7 +230,7 @@ namespace prjCybersecurityAssistant
                 // If no keyword detected, ask the user if they'd like to explore one
                 if (!foundKeyword)
                 {
-                    Speak("Would you like to learn more about a specific keyword? (phishing, passwords, suspicious links, social engineering, general). Just type one or press enter to skip.", ConsoleColor.Cyan);//(Manson, 2014)
+                    Speak("Would you like to learn more about a specific keyword? (phishing, passwords, suspicious links, social engineering, general and type tip to hear a fact about your favourite topic). Just type one or press enter to skip.", ConsoleColor.Cyan);//(Manson, 2014)
                     string keywordPrompt = GetUserInput("You: ");
                     PlaySound("input.wav");//(O'Didily, 2022)
 
@@ -250,7 +249,7 @@ namespace prjCybersecurityAssistant
                     }
                 }
                 // Personalised memory recall
-                if (!foundKeyword && !string.IsNullOrEmpty(favouriteTopic) && input.Contains("tip"))//(Corey, 2023)
+                if (!string.IsNullOrEmpty(favouriteTopic) || input.Contains("tip"))//(Corey, 2023)
                 {
                     Speak($"As someone interested in {favouriteTopic}, here's something just for you:", ConsoleColor.Green);//(Manson, 2014)
                     RespondWithRandomTip(favouriteTopic);// (Corey, 2023)
