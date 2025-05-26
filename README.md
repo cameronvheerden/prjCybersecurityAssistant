@@ -107,9 +107,10 @@ For advanced users, you can still build from source by following the instruction
 > **Screenshots**
 >
 > - Screenshots of my GitHub Actions workflow passing successfully.
->
-> ![Workflow Success Screenshot 1](UPLOAD_SCREENSHOT_HERE)
-> ![Workflow Success Screenshot 2](UPLOAD_ANOTHER_SCREENSHOT_HERE)
+> ![image](https://github.com/user-attachments/assets/66bf054e-08d1-46f5-aef4-2c2bfa8015e3)
+
+> ![image](https://github.com/user-attachments/assets/b138f04d-4150-45f6-b315-ac808574b9b9)
+
 
 ---
 
@@ -119,7 +120,7 @@ For advanced users, you can still build from source by following the instruction
 >
 > - YouTube video that demonstrates the chatbot in action.
 >
-> [YouTube Demo Link](PASTE_YOUR_LINK_HERE)
+> [YouTube Link][(PASTE_YOUR_LINK_HERE)](https://youtu.be/2HEV3OUzM2U)
 
 ---
 
