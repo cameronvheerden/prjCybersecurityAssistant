@@ -162,7 +162,7 @@ namespace prjCybersecurityAssistant
                 // Prompt user to ask about a keyword now
                 Speak("By the way, you can ask me about any of these keywords: phishing, passwords, suspicious links, social engineering, or general tips.", ConsoleColor.Cyan);//(Manson, 2014)
                 Speak("Which keyword would you like to know more about right now? (Or just press enter to skip)", ConsoleColor.Cyan);//(Manson, 2014)
-                string keywordInput = GetUserInput("You: ", allowSkip: true);
+                string keywordInput = GetUserInput("You: ");
                 PlaySound("input.wav");//(O'Didily, 2022)
 
                 if (!string.IsNullOrWhiteSpace(keywordInput))//(Corey, 2023
@@ -180,19 +180,10 @@ namespace prjCybersecurityAssistant
                 }
                 else
                 {
-                    // User skipped; show favourite topic
-                    Speak($"Since you skipped, let's jump into your favourite topic: {favouriteTopic}.", ConsoleColor.Green);//(Manson, 2014)
-                    if (topicTips.ContainsKey(favouriteTopic))//(Corey, 2023
-                    {
-                        RespondWithRandomTip(favouriteTopic);//(Corey, 2023
-                        PlaySound("keyword.wav");//(O'Didily, 2022)
-                    }
-                    else
-                    {
-                        Speak("Hmm, I don't have tips for that topic yet. Let's stick with general tips for now.", ConsoleColor.Yellow);//(Manson, 2014)
-                        RespondWithRandomTip("general");//(Corey, 2023)
-                        PlaySound("keyword.wav");//(O'Didily, 2022)
-                    }
+
+                    Speak("Hmm, I don't have tips for that topic yet. Let's stick with general tips for now.", ConsoleColor.Yellow);//(Manson, 2014)
+                    RespondWithRandomTip("general");//(Corey, 2023)
+                    PlaySound("keyword.wav");//(O'Didily, 2022)
                 }
             }
 
@@ -214,7 +205,7 @@ namespace prjCybersecurityAssistant
                     Console.ReadLine();
                     break;
                 }
-                
+
                 // Handle known sentiments and provide comforting or informative responses
                 string sentiment = DetectSentiment(input);//(Corey, 2023)
                 if (!string.IsNullOrEmpty(sentiment) && sentimentResponses.ContainsKey(sentiment))//(Corey, 2023)

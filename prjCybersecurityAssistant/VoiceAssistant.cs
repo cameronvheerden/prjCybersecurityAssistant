@@ -74,28 +74,32 @@ namespace prjCybersecurityAssistant
         // Prompts the user for input, ensuring a non-empty response.
         //Prompt text for the user.
         //User input in lowercase.
-        public static string GetUserInput(string prompt = "You: ", bool allowSkip = false)
+        public static string GetUserInput(string prompt = "You: ")
         {
-            while (true)
+            string input;
+
+            do
             {
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write(prompt);
                 Console.ResetColor();
 
-                string input = Console.ReadLine()?.Trim();
+                input = Console.ReadLine()?.Trim();
 
-                // If skipping is allowed, return empty input
-                if (allowSkip || !string.IsNullOrWhiteSpace(input))
+                if (string.IsNullOrWhiteSpace(input))
                 {
-                    return input?.ToLower(); // Return input (or empty) in lowercase
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine("Please enter something to continue...");
+                    Console.ResetColor();
                 }
 
-                // If not allowed and input is empty, ask again
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.WriteLine("Please enter something to continue...");
-                Console.ResetColor();
             }
+            while (string.IsNullOrWhiteSpace(input));
+            
+            return input.ToLower(); // Return input in lowercase for consistency
         }
+            
+
 
 
         // Plays a sound file synchronously and adds a short delay after playback.
