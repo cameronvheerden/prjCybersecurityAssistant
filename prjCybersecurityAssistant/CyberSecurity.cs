@@ -211,7 +211,7 @@ namespace prjCybersecurityAssistant
                 if (!string.IsNullOrEmpty(sentiment) && sentimentResponses.ContainsKey(sentiment))
                 {
                     sentimentResponses[sentiment](input);
-                    PlaySound(sentiment);
+                    PlaySound(sentiment + ".wav");
                 }
 
                 // Check if the input includes known cybersecurity keywords
@@ -387,7 +387,7 @@ namespace prjCybersecurityAssistant
             Speak("Alright, enough jokes! Let's get serious about cybersecurity. Ready to learn?", ConsoleColor.Cyan);
         }
 
-        /// Provides a random tip for the specified cybersecurity topic, using a color associated with the topic.
+        // Provides a random tip for the specified cybersecurity topic, using a color associated with the topic.
         private void RespondWithRandomTip(string topic)
         {
             if (topicTips.ContainsKey(topic))
