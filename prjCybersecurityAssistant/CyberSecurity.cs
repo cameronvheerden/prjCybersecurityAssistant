@@ -179,12 +179,23 @@ namespace prjCybersecurityAssistant
                         }
                     }
                 }
-            }
-            else
-            {
-                Speak("I'll just give you general tips until you pick a topic. (I'm flexible like that!)", ConsoleColor.Yellow);//(Manson, 2014)
-                PlaySound("nice.wav");//(O'Didily, 2022)
-                favouriteTopic = "general";
+
+                else if(string.IsNullOrEmpty(keywordInput))
+                {
+                    // User skipped; show favourite topic
+                    Speak($"Since you skipped, let's jump into your favourite topic: {favouriteTopic}.", ConsoleColor.Green);
+                    if (topicTips.ContainsKey(favouriteTopic))
+                    {
+                        RespondWithRandomTip(favouriteTopic);
+                        PlaySound("keyword.wav");
+                    }
+                    else
+                    {
+                        Speak("Hmm, I don't have tips for that topic yet. Let's stick with general tips for now.", ConsoleColor.Yellow);
+                        RespondWithRandomTip("general");
+                        PlaySound("keyword.wav");
+                    }
+                }
             }
 
             // Main chat loop
@@ -256,13 +267,6 @@ namespace prjCybersecurityAssistant
                     PlaySound("keyword.wav");//(O'Didily, 2022)
                     foundKeyword = true;
                 }
-
-                // Default response
-                if (!foundKeyword)
-                {
-                    Speak("I'm not sure I understand. Can you try rephrasing? (Or type 'help' for a list of topics I know!)", ConsoleColor.Yellow);//(Manson, 2014)
-                    PlaySound("default.wav");//(O'Didily, 2022)
-                }
             }
         }
 
@@ -270,7 +274,7 @@ namespace prjCybersecurityAssistant
         // Detects simple sentiment keywords in user input and returns the sentiment type.
         private string DetectSentiment(string input)//(Corey, 2023)
         {
-            if (input.Contains("worried") || input.Contains("scared") || input.Contains("anxious"))
+            if (input.Contains("worried") || input.Contains("worry") || input.Contains("anxious"))
                 return "worried";
 
             if (input.Contains("curious") || input.Contains("wonder") || input.Contains("interested"))
