@@ -1,5 +1,5 @@
 ﻿using System.Media;//(O'Didily, 2022)
-using System.Speech.Synthesis;//(Manson, 2014)
+using System.Speech.Synthesis;
 
 namespace prjCybersecurityAssistant
 {
@@ -74,34 +74,33 @@ namespace prjCybersecurityAssistant
         // Prompts the user for input, ensuring a non-empty response.
         //Prompt text for the user.
         //User input in lowercase.
-        public static string GetUserInput(string prompt = "You: ")
+        public static string GetUserInput(string prompt = "You: ", bool allowSkip = false)
         {
-            string input;
-
-            do
+            while (true)
             {
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write(prompt);
                 Console.ResetColor();
 
-                input = Console.ReadLine()?.Trim();
+                string input = Console.ReadLine()?.Trim();
 
-                if (string.IsNullOrWhiteSpace(input))
+                // If skipping is allowed, return empty input
+                if (allowSkip || !string.IsNullOrWhiteSpace(input))
                 {
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine("Please enter something to continue...");
-                    Console.ResetColor();
+                    return input?.ToLower(); // Return input (or empty) in lowercase
                 }
 
-            } while (string.IsNullOrWhiteSpace(input));
-
-            return input.ToLower(); // Optional: return lowercase for keyword matching
+                // If not allowed and input is empty, ask again
+                Console.ForegroundColor = ConsoleColor.Yellow;
+                Console.WriteLine("Please enter something to continue...");
+                Console.ResetColor();
+            }
         }
 
 
         // Plays a sound file synchronously and adds a short delay after playback.
         //Path to the sound file.
-        //True if playback succeeds, false otherwise.</returns>
+        //True if playback succeeds, false otherwise.
         public bool PlaySound(string filename)//(O'Didily, 2022)
         {
             try

@@ -162,38 +162,36 @@ namespace prjCybersecurityAssistant
                 // Prompt user to ask about a keyword now
                 Speak("By the way, you can ask me about any of these keywords: phishing, passwords, suspicious links, social engineering, or general tips.", ConsoleColor.Cyan);//(Manson, 2014)
                 Speak("Which keyword would you like to know more about right now? (Or just press enter to skip)", ConsoleColor.Cyan);//(Manson, 2014)
-                string keywordInput = GetUserInput("You: ");
+                string keywordInput = GetUserInput("You: ", allowSkip: true);
                 PlaySound("input.wav");//(O'Didily, 2022)
 
-                // If the user provides a keyword input, handle it
-                if (!string.IsNullOrWhiteSpace(keywordInput))
+                if (!string.IsNullOrWhiteSpace(keywordInput))//(Corey, 2023
                 {
-                    foreach (var keyword in keywordHandler.Keys)
+                    foreach (var keyword in keywordHandler.Keys)//(Corey, 2023
                     {
-                        if (keywordInput.Contains(keyword, StringComparison.OrdinalIgnoreCase))
+                        if (keywordInput.Contains(keyword, StringComparison.OrdinalIgnoreCase))//(Corey, 2023
                         {
                             Speak($"Great choice! Here's something about {keyword}:", ConsoleColor.Green);//(Manson, 2014)
-                            keywordHandler[keyword](keywordInput);
+                            keywordHandler[keyword](keywordInput);//(Corey, 2023
                             PlaySound("keyword.wav");//(O'Didily, 2022)
                             break;
                         }
                     }
                 }
-
-                else if(string.IsNullOrEmpty(keywordInput))
+                else
                 {
                     // User skipped; show favourite topic
-                    Speak($"Since you skipped, let's jump into your favourite topic: {favouriteTopic}.", ConsoleColor.Green);
-                    if (topicTips.ContainsKey(favouriteTopic))
+                    Speak($"Since you skipped, let's jump into your favourite topic: {favouriteTopic}.", ConsoleColor.Green);//(Manson, 2014)
+                    if (topicTips.ContainsKey(favouriteTopic))//(Corey, 2023
                     {
-                        RespondWithRandomTip(favouriteTopic);
-                        PlaySound("keyword.wav");
+                        RespondWithRandomTip(favouriteTopic);//(Corey, 2023
+                        PlaySound("keyword.wav");//(O'Didily, 2022)
                     }
                     else
                     {
-                        Speak("Hmm, I don't have tips for that topic yet. Let's stick with general tips for now.", ConsoleColor.Yellow);
-                        RespondWithRandomTip("general");
-                        PlaySound("keyword.wav");
+                        Speak("Hmm, I don't have tips for that topic yet. Let's stick with general tips for now.", ConsoleColor.Yellow);//(Manson, 2014)
+                        RespondWithRandomTip("general");//(Corey, 2023)
+                        PlaySound("keyword.wav");//(O'Didily, 2022)
                     }
                 }
             }
