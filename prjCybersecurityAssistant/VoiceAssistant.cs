@@ -3,7 +3,7 @@ using System.Speech.Synthesis;
 
 namespace prjCybersecurityAssistant
 {
-    public class VoiceAssistant
+    public abstract class VoiceAssistant
     {
         private readonly SpeechSynthesizer _ss;    
 
@@ -45,7 +45,7 @@ namespace prjCybersecurityAssistant
         }
 
         // Simulates a typing effect and adds conversational pauses before speaking
-        public void Speak(string text, ConsoleColor color = ConsoleColor.White, int typingDelay = 30, int pauseAfter = 300)
+        public virtual void Speak(string text, ConsoleColor color = ConsoleColor.White, int typingDelay = 30, int pauseAfter = 300)
         {
             Console.ForegroundColor = color;
 
