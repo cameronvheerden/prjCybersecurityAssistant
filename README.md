@@ -8,7 +8,7 @@ This is Part 2 of the Cybersecurity Awareness Chatbot assignment. In this part, 
 
 ## Features
 
-- **Keyword Recognition:** Recognises cybersecurity-related keywords (e.g., `password`, `scam`, `privacy`) and provides relevant guidance.
+- **Keyword Recognition:** Recognises cybersecurity-related keywords (e.g., `phishing`, `password`, `social engineering`) and provides relevant guidance.
 - **Random Responses:** Delivers varied responses for certain topics (such as phishing) using random selection from a list or array.
 - **Conversation Flow:** Maintains a seamless conversation, handling follow-up questions and keeping context.
 - **Memory and Recall:** Remembers user details (like name or favourite cybersecurity topics) for personalisation.
@@ -106,7 +106,7 @@ For advanced users, you can still build from source by following the instruction
 
 > **Screenshots**
 >
-> - Please include one or more screenshots here showing your GitHub Actions workflow passing successfully.
+> - Screenshots of my GitHub Actions workflow passing successfully.
 >
 > ![Workflow Success Screenshot 1](UPLOAD_SCREENSHOT_HERE)
 > ![Workflow Success Screenshot 2](UPLOAD_ANOTHER_SCREENSHOT_HERE)
@@ -117,7 +117,7 @@ For advanced users, you can still build from source by following the instruction
 
 > **YouTube Video Link**
 >
-> - Upload your demo video to YouTube and paste the link below to demonstrate the chatbot in action.
+> - YouTube video that demonstrates the chatbot in action.
 >
 > [YouTube Demo Link](PASTE_YOUR_LINK_HERE)
 
