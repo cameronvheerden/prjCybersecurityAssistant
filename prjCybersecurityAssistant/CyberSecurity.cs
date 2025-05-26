@@ -147,8 +147,9 @@ namespace prjCybersecurityAssistant
         ║  2. Passwords                      ║
         ║  3. Suspicious Links               ║
         ║  4. Social Engineering             ║
-        ║  5. General Tips                   ║
-        ║  6. Exit                           ║
+        ║  5. General                        ║
+        ║  6. Favourite Tips                 ║
+        ║  7. Exit                           ║
         ╚════════════════════════════════════╝
     ");
             favouriteTopic = GetUserInput("You: ");
