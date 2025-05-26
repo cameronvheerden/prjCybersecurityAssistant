@@ -7,6 +7,7 @@
             // Create an instance of the CyberSecurity class
             CyberSecurity cyber = new CyberSecurity();
 
+            cyber.mainMenu();
         }
     }
 }
