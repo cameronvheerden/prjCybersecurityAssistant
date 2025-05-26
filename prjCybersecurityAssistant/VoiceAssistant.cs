@@ -1,5 +1,5 @@
-﻿using System.Media;
-using System.Speech.Synthesis;
+﻿using System.Media;//(O'Didily, 2022)
+using System.Speech.Synthesis;//(Manson, 2014)
 
 namespace prjCybersecurityAssistant
 {
@@ -9,27 +9,27 @@ namespace prjCybersecurityAssistant
 
     public abstract class VoiceAssistant
     {
-        private readonly SpeechSynthesizer _ss;    
+        private readonly SpeechSynthesizer _ss;//(Manson, 2014)    
 
         //Initializes the speech synthesizer and sets the preferred voice if available.
         public VoiceAssistant()
         {
-            _ss = new SpeechSynthesizer();
+            _ss = new SpeechSynthesizer();//(Manson, 2014)
 
             try
             {
-                _ss.SetOutputToDefaultAudioDevice();
-                _ss.Rate = 1; // Moderate speed
+                _ss.SetOutputToDefaultAudioDevice();//(Manson, 2014)
+                _ss.Rate = 1; //(Manson, 2014) Moderate speed
 
-                var preferredVoice = "Microsoft Hazel Desktop";
-                bool voiceFound = false;
+                var preferredVoice = "Microsoft Hazel Desktop";//(Opus), 2013)
+                bool voiceFound = false;//(Opus), 2013)
 
-                foreach (var voice in _ss.GetInstalledVoices())
+                foreach (var voice in _ss.GetInstalledVoices())//(Opus), 2013)
                 {
-                    if (voice.Enabled && voice.VoiceInfo.Name.Equals(preferredVoice, StringComparison.OrdinalIgnoreCase))
+                    if (voice.Enabled && voice.VoiceInfo.Name.Equals(preferredVoice, StringComparison.OrdinalIgnoreCase))//(Opus), 2013)
                     {
-                        _ss.SelectVoice(preferredVoice);
-                        voiceFound = true;
+                        _ss.SelectVoice(preferredVoice);//(Opus), 2013)
+                        voiceFound = true;//(Opus), 2013)
                         break;
                     }
                 }
@@ -54,19 +54,19 @@ namespace prjCybersecurityAssistant
         //Console color for the text.
         //Delay per character in ms.
         //Pause after text in ms before speaking.
-        public virtual void Speak(string text, ConsoleColor color = ConsoleColor.DarkMagenta, int typingDelay = 30, int pauseAfter = 300)
+        public virtual void Speak(string text, ConsoleColor color = ConsoleColor.DarkMagenta, int typingDelay = 30, int pauseAfter = 300)//(Manson, 2014)
         {
             Console.ForegroundColor = color;
 
-            foreach (char c in text)
+            foreach (char c in text)//(Manson, 2014)
             {
-                Console.Write(c);
-                Thread.Sleep(typingDelay);
+                Console.Write(c);//(Manson, 2014)
+                Thread.Sleep(typingDelay);//(Manson, 2014)
             }
 
             Console.WriteLine();
-            Thread.Sleep(pauseAfter);
-            _ss.Speak(text);
+            Thread.Sleep(pauseAfter);//(Manson, 2014)
+            _ss.Speak(text);//(Manson, 2014)
             Console.ResetColor();
         }
 
@@ -111,7 +111,7 @@ namespace prjCybersecurityAssistant
                 player.SoundLocation = filename;//(O'Didily, 2022)
                 player.PlaySync();//(O'Didily, 2022) Changed to PlaySync for synchronous playback
                 Thread.Sleep(1000); // Add a 1 second delay after the sound is played
-                return true;//
+                return true;
             }
             catch (Exception ex)
             {

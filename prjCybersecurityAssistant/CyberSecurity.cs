@@ -14,16 +14,16 @@ namespace prjCybersecurityAssistant
         private string favouriteTopic = "";
 
         // Random instance for generating random responses from the assistant
-        private readonly Random _random;
+        private readonly Random _random;// (Plays, 2022)
 
         //Dictionary to hold sentiment responses
-        private Dictionary<string, Action<string>> sentimentResponses;
+        private Dictionary<string, Action<string>> sentimentResponses;//(Corey, 2023)
 
         //Dictionary to hold keyword handlers
-        private Dictionary<string, Action<string>> keywordHandler;
+        private Dictionary<string, Action<string>> keywordHandler;//(Corey, 2023)
 
         //Collection of keywords and their associated Colours for the chatbots responses
-        private Dictionary<string, ConsoleColor> topicColors = new Dictionary<string, ConsoleColor>(StringComparer.OrdinalIgnoreCase)
+        private Dictionary<string, ConsoleColor> topicColors = new Dictionary<string, ConsoleColor>(StringComparer.OrdinalIgnoreCase)//(Corey, 2023)
         {
             ["phishing"] = ConsoleColor.Yellow,
             ["strong passwords"] = ConsoleColor.Green,
@@ -33,9 +33,9 @@ namespace prjCybersecurityAssistant
         };
 
         //Generic dictionary to hold keyword responses
-        private Dictionary<string, List<string>> topicTips = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase)
+        private Dictionary<string, List<string>> topicTips = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase)//(Corey, 2023)
         {
-            ["phishing"] = new List<string>
+            ["phishing"] = new List<string>//(Corey, 2023)
             {
                 "Phishing scams are like digital fishing trips — but instead of fish, scammers are after your passwords, bank info, and personal details.",
                 "Phishing emails might look official, but they often contain spelling errors, weird links, or suspicious attachments.",
@@ -46,7 +46,7 @@ namespace prjCybersecurityAssistant
                 "If something feels fishy — it probably is. Always pause and verify before clicking or replying."
             },
 
-            ["passwords"] = new List<string>
+            ["passwords"] = new List<string>//(Corey, 2023)
             {
                 "Think of your password like a toothbrush never share it, change it often, and don’t use your name on it!",
                 "Use a mix of letters, numbers, and symbols and skip the obvious stuff like '123456' or 'password'.",
@@ -57,7 +57,7 @@ namespace prjCybersecurityAssistant
                 "Update your passwords regularly, especially if you’ve heard about a data breach from a site you use."
             },
 
-            ["suspicious links"] = new List<string>
+            ["suspicious links"] = new List<string>//(Corey, 2023)
             {
                 "A suspicious link is like a sketchy shortcut in a video game it might take you somewhere dangerous!",
                 "Always hover over a link to see where it *really* goes before clicking. If it looks weird, skip it.",
@@ -68,7 +68,7 @@ namespace prjCybersecurityAssistant
                 "Bad links can install malware just from visiting the site be picky about what you open."
             },
 
-            ["social engineering"] = new List<string>
+            ["social engineering"] = new List<string>//(Corey, 2023)
             {
                 "Social engineering is basically hacking the human scammers trick you into handing over info willingly.",
                 "If someone asks for your password, even if they sound official, stop right there. Real support never does that.",
@@ -79,7 +79,7 @@ namespace prjCybersecurityAssistant
                 "Stay alert being friendly is great, but don’t let politeness cost you your personal info."
             },
 
-            ["general"] = new List<string>
+            ["general"] = new List<string>//(Corey, 2023)
             {
                 "The internet is awesome, but it's not a playground with safety mats — always stay a little cautious.",
                 "Keep your browser and software updated. It's like putting on armor before going into battle.",
@@ -96,10 +96,10 @@ namespace prjCybersecurityAssistant
         public CyberSecurity()
         {
             //Initialze a new Random instance for generating random responses
-            _random = new Random();
+            _random = new Random();// (Plays, 2022)
 
             //Set up Sentiment handlers
-            sentimentResponses = new Dictionary<string, Action<string>>(StringComparer.OrdinalIgnoreCase)
+            sentimentResponses = new Dictionary<string, Action<string>>(StringComparer.OrdinalIgnoreCase)//(Corey, 2023)
             {
                 {"worried", worriedResponse},
                 {"curious", curiousResponse},
@@ -109,7 +109,7 @@ namespace prjCybersecurityAssistant
             };
 
             //Set up Keyword handlers
-            keywordHandler = new Dictionary<string, Action<string>>(StringComparer.OrdinalIgnoreCase)
+            keywordHandler = new Dictionary<string, Action<string>>(StringComparer.OrdinalIgnoreCase)//(Corey, 2023)
             {
                 {"phishing", input => RespondWithRandomTip("phishing")},
                 {"passwords", input => RespondWithRandomTip("passwords")},
@@ -123,22 +123,22 @@ namespace prjCybersecurityAssistant
 
         public void Start()
         {
-            PlaySound("startup.wav");
+            PlaySound("startup.wav");//(O'Didily, 2022)
             Console.WriteLine("Press enter to start!");
             Console.ReadLine(); // Wait for user to press enter before starting
 
             // Initial welcome message with humor
-            Speak("Welcome to the CyberSecurity Assistant! I'm your digital bodyguard, bouncer, and comedian rolled into one. Before we get serious, here's a quick round of cybersecurity dad jokes to lighten the mood!", ConsoleColor.Cyan);
-            PlaySound("drumroll.wav");
+            Speak("Welcome to the CyberSecurity Assistant! I'm your digital bodyguard, bouncer, and comedian rolled into one. Before we get serious, here's a quick round of cybersecurity dad jokes to lighten the mood!", ConsoleColor.Cyan);//(Manson, 2014)
+            PlaySound("drumroll.wav");//(O'Didily, 2022)
             dadCyberSecurityJokes();
 
             // Ask for user's name
-            Speak("Before we dive in, what's your name? (Don't worry, I won't put it in a password... or will I? Just kidding!)", ConsoleColor.Cyan);
+            Speak("Before we dive in, what's your name? (Don't worry, I won't put it in a password... or will I? Just kidding!)", ConsoleColor.Cyan);//(Manson, 2014)
             userName = GetUserInput("You: ");
-            PlaySound("input.wav");
+            PlaySound("input.wav");//(O'Didily, 2022)
 
             // Ask for user's favorite topic
-            Speak($"Nice to meet you, {userName}! What's your favourite cybersecurity topic? I'll display the topics I am well aware of.", ConsoleColor.Cyan);
+            Speak($"Nice to meet you, {userName}! What's your favourite cybersecurity topic? I'll display the topics I am well aware of.", ConsoleColor.Cyan);//(Manson, 2014)
             Console.WriteLine(@"
         ╔════════════════════════════════════╗
         ║         CYBERSECURITY MENU         ║
@@ -152,18 +152,18 @@ namespace prjCybersecurityAssistant
         ╚════════════════════════════════════╝
     ");
             favouriteTopic = GetUserInput("You: ");
-            PlaySound("input.wav");
+            PlaySound("input.wav");//(O'Didily, 2022)
 
             if (topicTips.ContainsKey(favouriteTopic))
-            {
-                Speak($"Awesome! I'll remember that your favourite topic is {favouriteTopic}. Expect some special tips later!", ConsoleColor.Green);
-                PlaySound("awesome.wav");
+            {//(Manson, 2014)
+                Speak($"Awesome! I'll remember that your favourite topic is {favouriteTopic}. Expect some special tips later!", ConsoleColor.Green);//(Manson, 2014)
+                PlaySound("awesome.wav");//(O'Didily, 2022)
 
                 // Prompt user to ask about a keyword now
-                Speak("By the way, you can ask me about any of these keywords: phishing, passwords, suspicious links, social engineering, or general tips.", ConsoleColor.Cyan);
-                Speak("Which keyword would you like to know more about right now? (Or just press enter to skip)", ConsoleColor.Cyan);
+                Speak("By the way, you can ask me about any of these keywords: phishing, passwords, suspicious links, social engineering, or general tips.", ConsoleColor.Cyan);//(Manson, 2014)
+                Speak("Which keyword would you like to know more about right now? (Or just press enter to skip)", ConsoleColor.Cyan);//(Manson, 2014)
                 string keywordInput = GetUserInput("You: ");
-                PlaySound("input.wav");
+                PlaySound("input.wav");//(O'Didily, 2022)
 
                 // If the user provides a keyword input, handle it
                 if (!string.IsNullOrWhiteSpace(keywordInput))
@@ -172,9 +172,9 @@ namespace prjCybersecurityAssistant
                     {
                         if (keywordInput.Contains(keyword, StringComparison.OrdinalIgnoreCase))
                         {
-                            Speak($"Great choice! Here's something about {keyword}:", ConsoleColor.Green);
+                            Speak($"Great choice! Here's something about {keyword}:", ConsoleColor.Green);//(Manson, 2014)
                             keywordHandler[keyword](keywordInput);
-                            PlaySound("keyword.wav");
+                            PlaySound("keyword.wav");//(O'Didily, 2022)
                             break;
                         }
                     }
@@ -182,8 +182,8 @@ namespace prjCybersecurityAssistant
             }
             else
             {
-                Speak("I'll just give you general tips until you pick a topic. (I'm flexible like that!)", ConsoleColor.Yellow);
-                PlaySound("nice.wav");
+                Speak("I'll just give you general tips until you pick a topic. (I'm flexible like that!)", ConsoleColor.Yellow);//(Manson, 2014)
+                PlaySound("nice.wav");//(O'Didily, 2022)
                 favouriteTopic = "general";
             }
 
@@ -191,37 +191,37 @@ namespace prjCybersecurityAssistant
             while (true)
             {
                 // Ask for user input and allow them to share concerns or ask questions
-                Speak("Ask me anything about cybersecurity, or type 'exit' to leave (I promise not to take it personally!). Tell me if you are worried about anything or have any fears entering the online space.", ConsoleColor.Cyan);
+                Speak("Ask me anything about cybersecurity, or type 'exit' to leave (I promise not to take it personally!). Tell me if you are worried about anything or have any fears entering the online space.", ConsoleColor.Cyan);//(Manson, 2014)
                 Console.WriteLine("Are you worried about anything or have fears such as being 'curious', 'frustrated', 'overwhelmed', 'skeptical'?");
                 string input = GetUserInput("You: ");
-                PlaySound("input.wav");
+                PlaySound("input.wav");//(O'Didily, 2022)
 
                 // Exit condition
-                if (input.Contains("exit", StringComparison.OrdinalIgnoreCase))
+                if (input.Contains("exit", StringComparison.OrdinalIgnoreCase))//(Corey, 2023)
                 {
-                    PlaySound("oh no.wav");
-                    Speak($"Goodbye {userName}! Remember: If you ever get a suspicious email, just send it to me for a joke. Stay safe and silly!", ConsoleColor.Magenta);
-                    PlaySound("bye bye.wav");
+                    PlaySound("oh no.wav");//(O'Didily, 2022)
+                    Speak($"Goodbye {userName}! Remember: If you ever get a suspicious email, just send it to me for a joke. Stay safe and silly!", ConsoleColor.Magenta);//(Manson, 2014)
+                    PlaySound("bye bye.wav");//(O'Didily, 2022)
                     Console.ReadLine();
                     break;
                 }
-
+                
                 // Handle known sentiments and provide comforting or informative responses
-                string sentiment = DetectSentiment(input);
-                if (!string.IsNullOrEmpty(sentiment) && sentimentResponses.ContainsKey(sentiment))
+                string sentiment = DetectSentiment(input);//(Corey, 2023)
+                if (!string.IsNullOrEmpty(sentiment) && sentimentResponses.ContainsKey(sentiment))//(Corey, 2023)
                 {
-                    sentimentResponses[sentiment](input);
-                    PlaySound(sentiment + ".wav");
+                    sentimentResponses[sentiment](input);//(Corey, 2023)
+                    PlaySound(sentiment + ".wav");//(O'Didily, 2022)
                 }
 
                 // Check if the input includes known cybersecurity keywords
                 bool foundKeyword = false;
-                foreach (var keyword in keywordHandler.Keys)
+                foreach (var keyword in keywordHandler.Keys)//(Corey, 2023)
                 {
-                    if (input.Contains(keyword, StringComparison.OrdinalIgnoreCase))
+                    if (input.Contains(keyword, StringComparison.OrdinalIgnoreCase))//(Corey, 2023)
                     {
-                        keywordHandler[keyword](input);
-                        PlaySound("keyword.wav");
+                        keywordHandler[keyword](input);//(Corey, 2023)
+                        PlaySound("keyword.wav");//(O'Didily, 2022)
                         foundKeyword = true;
                         break;
                     }
@@ -230,30 +230,45 @@ namespace prjCybersecurityAssistant
                 // If no keyword detected, ask the user if they'd like to explore one
                 if (!foundKeyword)
                 {
-                    Speak("Would you like to learn more about a specific keyword? (phishing, passwords, suspicious links, social engineering, general). Just type one or press enter to skip.", ConsoleColor.Cyan);
+                    Speak("Would you like to learn more about a specific keyword? (phishing, passwords, suspicious links, social engineering, general). Just type one or press enter to skip.", ConsoleColor.Cyan);//(Manson, 2014)
                     string keywordPrompt = GetUserInput("You: ");
-                    PlaySound("input.wav");
+                    PlaySound("input.wav");//(O'Didily, 2022)
 
-                    if (!string.IsNullOrWhiteSpace(keywordPrompt))
+                    if (!string.IsNullOrWhiteSpace(keywordPrompt))//(Corey, 2023)
                     {
-                        foreach (var keyword in keywordHandler.Keys)
+                        foreach (var keyword in keywordHandler.Keys)//(Corey, 2023)
                         {
-                            if (keywordPrompt.Contains(keyword, StringComparison.OrdinalIgnoreCase))
+                            if (keywordPrompt.Contains(keyword, StringComparison.OrdinalIgnoreCase))//(Corey, 2023)
                             {
-                                Speak($"Here's a quick tip about {keyword}:", ConsoleColor.Green);
-                                keywordHandler[keyword](keywordPrompt);
-                                PlaySound("keyword.wav");
+                                Speak($"Here's a quick tip about {keyword}:", ConsoleColor.Green);//(Manson, 2014)
+                                keywordHandler[keyword](keywordPrompt);//(Corey, 2023)
+                                PlaySound("keyword.wav");//(O'Didily, 2022)
                                 break;
                             }
                         }
                     }
+                }
+                // Personalised memory recall
+                if (!foundKeyword && !string.IsNullOrEmpty(favouriteTopic) && input.Contains("tip"))//(Corey, 2023)
+                {
+                    Speak($"As someone interested in {favouriteTopic}, here's something just for you:", ConsoleColor.Green);//(Manson, 2014)
+                    RespondWithRandomTip(favouriteTopic);// (Corey, 2023)
+                    PlaySound("keyword.wav");//(O'Didily, 2022)
+                    foundKeyword = true;
+                }
+
+                // Default response
+                if (!foundKeyword)
+                {
+                    Speak("I'm not sure I understand. Can you try rephrasing? (Or type 'help' for a list of topics I know!)", ConsoleColor.Yellow);//(Manson, 2014)
+                    PlaySound("default.wav");//(O'Didily, 2022)
                 }
             }
         }
 
 
         // Detects simple sentiment keywords in user input and returns the sentiment type.
-        private string DetectSentiment(string input)
+        private string DetectSentiment(string input)//(Corey, 2023)
         {
             if (input.Contains("worried") || input.Contains("scared") || input.Contains("anxious"))
                 return "worried";
@@ -274,9 +289,9 @@ namespace prjCybersecurityAssistant
         }
 
         // Responds to "worried" sentiment with a random reassuring message.
-        private void worriedResponse(string input)
+        private void worriedResponse(string input)//(Programming, 2019)
         {
-            List<string> _sentiment = new List<string>
+            List<string> _sentiment = new List<string>//(Programming, 2019)
             {
               "It's completely understandable to feel worried or anxious browsing the web. Scammers can be very cruel and they exploit innocent vulnerable people but that's why I am here to assist you.",
               "That makes sense the internet can feel like a risky place sometimes. You're not alone in feeling this way, and I can help you spot the red flags.",
@@ -288,14 +303,14 @@ namespace prjCybersecurityAssistant
             };
 
             // Randomly select a response from the list
-            string response = _sentiment[_random.Next(_sentiment.Count)];
-            Speak(response, ConsoleColor.DarkYellow);
+            string response = _sentiment[_random.Next(_sentiment.Count)];// (Plays, 2022)
+            Speak(response, ConsoleColor.DarkYellow);//(Manson, 2014)
         }
 
         // Responds to "curious" sentiment with a random informative message.
-        private void curiousResponse(string input)
+        private void curiousResponse(string input)//(Programming, 2019)
         {
-            List<string> _sentiment = new List<string>
+            List<string> _sentiment = new List<string>//(Programming, 2019)
             {
                 "Curiosity is a great starting point. Let me show you how things like phishing and data breaches actually work.",
                 "That’s a good question. Learning how the risks work helps you spot and avoid them — let’s dive into it.",
@@ -304,15 +319,15 @@ namespace prjCybersecurityAssistant
                 "Great question! The web has many layers, and understanding how attacks work gives you the upper hand."
             };
 
-            string response = _sentiment[_random.Next(_sentiment.Count)];
-            Speak(response, ConsoleColor.Blue);
+            string response = _sentiment[_random.Next(_sentiment.Count)];// (Plays, 2022)
+            Speak(response, ConsoleColor.Blue);//(Manson, 2014)
         }
 
 
         // Responds to "frustrated" sentiment with a random empathetic message.
-        private void frustratedResponse(string input)
+        private void frustratedResponse(string input)//(Programming, 2019)
         {
-            List<string> _sentiment = new List<string>
+            List<string> _sentiment = new List<string>//(Programming, 2019)
             {
                 "I hear you — it can be incredibly frustrating when things don’t seem to improve. Let’s troubleshoot together.",
                 "Spam, scams, pop-ups — I get it. That stuff wears anyone down. But I’ve got a few tricks that might help.",
@@ -321,16 +336,16 @@ namespace prjCybersecurityAssistant
                 "That kind of frustration is totally valid. Let me guide you through some ways to reduce those headaches."
             };
 
-            string response = _sentiment[_random.Next(_sentiment.Count)];
-            Speak(response, ConsoleColor.DarkRed);
+            string response = _sentiment[_random.Next(_sentiment.Count)];// (Plays, 2022)
+            Speak(response, ConsoleColor.DarkRed);//(Manson, 2014)
         }
 
 
         // Responds to "overwhelmed" sentiment with a random supportive message.
 
-        private void overwhelmedResponse(string input)
+        private void overwhelmedResponse(string input)//(Programming, 2019)
         {
-            List<string> _sentiment = new List<string>
+            List<string> _sentiment = new List<string>//(Programming, 2019)
             {
                 "There's a lot out there, and it’s easy to feel overloaded. Let’s take it one step at a time.",
                 "Totally understandable — cybersecurity can feel like a huge topic. I’ll walk you through the basics.",
@@ -339,15 +354,15 @@ namespace prjCybersecurityAssistant
                 "Let’s breathe for a second. You’re not expected to master this overnight. Let’s tackle one topic together."
             };
 
-            string response = _sentiment[_random.Next(_sentiment.Count)];
-            Speak(response, ConsoleColor.Cyan);
+            string response = _sentiment[_random.Next(_sentiment.Count)];// (Plays, 2022)
+            Speak(response, ConsoleColor.Cyan);//(Manson, 2014)
         }
 
 
         // Responds to "skeptical" sentiment with a random validating message.
-        private void skepticalResponse(string input)
+        private void skepticalResponse(string input)//(Programming, 2019)
         {
-            List<string> _sentiment = new List<string>
+            List<string> _sentiment = new List<string>//(Programming, 2019)
             {
                 "Skepticism is healthy. Let’s look at why these tips actually work, not just blindly follow them.",
                 "That’s fair — some of it does sound too good to be true. Let me show you some real-world examples.",
@@ -356,15 +371,15 @@ namespace prjCybersecurityAssistant
                 "No pressure to believe everything right away — I’ll just share the facts, and you decide what makes sense."
             };
 
-            string response = _sentiment[_random.Next(_sentiment.Count)];
-            Speak(response, ConsoleColor.DarkGray);
+            string response = _sentiment[_random.Next(_sentiment.Count)];// (Plays, 2022)
+            Speak(response, ConsoleColor.DarkGray);//(Manson, 2014)
         }
 
         //Tells a set of cybersecurity-themed dad jokes to the user.
-        private void dadCyberSecurityJokes()
+        private void dadCyberSecurityJokes()//(Programming, 2019)
         {
             // List of cybersecurity dad jokes
-            List<string> dadJokes = new List<string>
+            List<string> dadJokes = new List<string>//(Programming, 2019)//(Programming, 2019)
             {
                 "Why did the hacker break up with the internet? There was no connection.",
                 "I told my password it was too weak. It cried... and then got hacked.",
@@ -378,30 +393,30 @@ namespace prjCybersecurityAssistant
             // Tell 3 random jokes
             for (int i = 0; i < 2; i++)
             {
-                string joke = dadJokes[_random.Next(dadJokes.Count)];
-                Speak(joke, ConsoleColor.Green);
-                PlaySound("joke.wav");
+                string joke = dadJokes[_random.Next(dadJokes.Count)];// (Plays, 2022)
+                Speak(joke, ConsoleColor.Green);//(Manson, 2014)
+                PlaySound("joke.wav");//(O'Didily, 2022)
                 Thread.Sleep(1000); // pause for effect
             }
-            PlaySound("BOO.wav");
-            Speak("Alright, enough jokes! Let's get serious about cybersecurity. Ready to learn?", ConsoleColor.Cyan);
+            PlaySound("BOO.wav");//(O'Didily, 2022)
+            Speak("Alright, enough jokes! Let's get serious about cybersecurity. Ready to learn?", ConsoleColor.Cyan);//(Manson, 2014)
         }
 
         // Provides a random tip for the specified cybersecurity topic, using a color associated with the topic.
-        private void RespondWithRandomTip(string topic)
+        private void RespondWithRandomTip(string topic)//(Monkey, 2020)
         {
-            if (topicTips.ContainsKey(topic))
+            if (topicTips.ContainsKey(topic))//(Corey, 2023)
             {
-                var tips = topicTips[topic];
-                string randomTip = tips[_random.Next(tips.Count)];
+                var tips = topicTips[topic];//(Monkey, 2020)
+                string randomTip = tips[_random.Next(tips.Count)];// (Plays, 2022)
 
                 // Try to get a color for the topic, fallback to Gray if not found
-                ConsoleColor color = topicColors.ContainsKey(topic) ? topicColors[topic] : ConsoleColor.Gray;
-                Speak(randomTip, color);
+                ConsoleColor color = topicColors.ContainsKey(topic) ? topicColors[topic] : ConsoleColor.Gray;//(Corey, 2023)
+                Speak(randomTip, color);//(Manson, 2014)
             }
             else
             {
-                Speak("Sorry, I don't have tips on that topic yet.", ConsoleColor.Red);
+                Speak("Sorry, I don't have tips on that topic yet.", ConsoleColor.Red);//(Manson, 2014)
             }
         }
     }
